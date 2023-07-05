@@ -55,7 +55,9 @@ def decode(outputs, length, sentence, id2label):
             e = ""
             for char_id in entity.split("-"):
                 e += sentence[int(char_id)]
-            st, et = entity.split("-") 
+            index_list = entity.split("-")
+            st = index_list[0]
+            et = index_list[-1]
             result.append(id2label[str(entity_type)] + "/" + st + "/" + et + "#" + e)
 
         return list(predicts), result
