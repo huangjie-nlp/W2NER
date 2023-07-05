@@ -53,9 +53,10 @@ def decode(outputs, length, sentence, id2label):
             entity = res[0]
             entity_type = res[1]
             e = ""
-            for char_id in entity:
+            for char_id in entity.split("-"):
                 e += sentence[int(char_id)]
-            result.append(id2label[str(entity_type)] + "/" + entity[0] + "/" + entity[-1] + "#" + e)
+            st, et = entity.split("-") 
+            result.append(id2label[str(entity_type)] + "/" + st + "/" + et + "#" + e)
 
         return list(predicts), result
 
@@ -73,10 +74,3 @@ def parser_indx_to_text(li, sentence):
         entity = e_type + '/' + str(i["index"][0]) + '/' +str(i["index"][-1]) + '#' + e
         result.append(entity)
     return result
-if __name__ == '__main__':
-    n = 6 * 70
-    m = 7303
-    x = 3500
-    y = 500
-    g = n + m + x + y
-    print(136000-g)
